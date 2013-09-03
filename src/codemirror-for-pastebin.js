@@ -66,6 +66,7 @@
             selectedLanguage = languages[selectedId];
         if (!selectedLanguage) {
             console.error('Unsupported language ID: ' + selectedId);
+            cm.setOption('mode', '');
         } else {
             cm.setOption('mode', selectedLanguage);
         }
