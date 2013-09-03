@@ -55,8 +55,7 @@
             {
                 lineNumbers: true,
                 matchBrackets: true,
-                tabSize: 2,
-                styleActiveLine: true
+                styleActiveLine: true,
             }
         );
 

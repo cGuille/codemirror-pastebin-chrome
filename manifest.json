@@ -3,15 +3,24 @@
 
     "name": "CodeMirror for Pastebin",
     "description": "Provide a CodeMirror text editor on pastebin.com. Based on the work of Maxime (@EpocDotFr) : http://blog.epoc.fr/2013/09/01/codemirror-for-pastebin/",
-    "version": "0.1",
+    "version": "0.2",
 
     "author": "Guillaume Charmetant (@cGuille) - <cguille.dev@gmail.com>",
 
     "content_scripts": [
         {
             "matches": ["http://pastebin.com/*"],
-            "css": ["lib/codemirror/codemirror.css", "lib/codemirror/themes.css"],
-            "js": ["lib/codemirror/codemirror.js", "lib/codemirror/modes.js", "src/codemirror-for-pastebin.js"],
+            "css": [
+                "lib/codemirror/codemirror.css",
+                "lib/codemirror/themes.css"
+            ],
+            "js": [
+                "lib/codemirror/codemirror.js",
+                "lib/codemirror/active-line.js",
+                "lib/codemirror/matchbrackets.js",
+                "lib/codemirror/modes.js",
+                "src/codemirror-for-pastebin.js"
+            ],
             "run_at":  "document_end"
         }
     ]
