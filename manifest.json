@@ -7,21 +7,12 @@
 
     "author": "Guillaume Charmetant (@cGuille) - <cguille.dev@gmail.com>",
 
-    "permissions": [
-        "http://pastebin.com/"
-    ],
-
     "content_scripts": [
         {
             "matches": ["http://pastebin.com/*"],
-            "css": ["lib/codemirror/codemirror.css", "lib/codemirror/themes/ALL.css"],
-            "js": ["lib/codemirror/codemirror.js", "lib/codemirror/modes/ALL.js", "src/codemirror-for-pastebin.js"],
+            "css": ["lib/codemirror/codemirror.css", "lib/codemirror/themes.css"],
+            "js": ["lib/codemirror/codemirror.js", "lib/codemirror/modes.js", "src/codemirror-for-pastebin.js"],
             "run_at":  "document_end"
         }
-    ],
-
-    "web_accessible_resources": [
-        "lib/codemirror/modes/*",
-        "lib/codemirror/themes/*"
     ]
 }
