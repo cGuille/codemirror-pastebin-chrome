@@ -47,7 +47,13 @@
         53 : 'xml',
         205 : 'yaml',
         72 : 'z80'
-    };
+    },
+    themes = window.THEMES.map(function (themeFilePath) {
+        return themeFilePath.substring(
+            themeFilePath.lastIndexOf('/') + 1,
+            themeFilePath.lastIndexOf('.')
+        );
+    });
 
     var pasteFormatElt = document.getElementsByName('paste_format')[0],
         cm = CodeMirror.fromTextArea(
@@ -57,7 +63,8 @@
                 matchBrackets: true,
                 styleActiveLine: true,
             }
-        );
+        ),
+        updateTheme = cm.setOption.bind(cm, 'theme');
 
     cm.setSize('100%');
 
@@ -71,4 +78,55 @@
             cm.setOption('mode', selectedLanguage);
         }
     }, false);
+
+    var contentTitleElt = document.querySelector('div.content_title'),
+        containerElt = document.createElement('div'),
+        themeLblElt = document.createElement('label'),
+        selectThemeElt = document.createElement('select'),
+        indentStyleLblElt = document.createElement('label'),
+        selectIndentStyleElt = document.createElement('select'),
+        tabWidthLblElt = document.createElement('label'),
+        selectTabWidthElt = document.createElement('select');
+
+    containerElt.appendChild(document.createTextNode('Editor options: '))
+
+    themeLblElt.appendChild(document.createTextNode('Theme: '));
+    containerElt.appendChild(themeLblElt);
+    themes.forEach(function (theme) {
+        var optionElt = document.createElement('option');
+        optionElt.setAttribute('value', theme);
+        optionElt.textContent = theme;
+        selectThemeElt.appendChild(optionElt);
+    });
+    containerElt.appendChild(selectThemeElt);
+    selectThemeElt.addEventListener('change', function (event) {
+        var selectedIndex = selectThemeElt.selectedIndex,
+            selectedTheme = selectThemeElt.options[selectedIndex].value
+        updateTheme(selectedTheme);
+        localStorage.cmTheme = selectedTheme;
+    }, false);
+    if (!localStorage.cmTheme) {
+        localStorage.cmTheme = '';
+    }
+
+    for (var i = 0; i < selectThemeElt.options.length; ++i) {
+        var optionElt = selectThemeElt.options[i];
+        if (localStorage.cmTheme === optionElt.value) {
+            optionElt.setAttribute('selected');
+            updateTheme(localStorage.cmTheme);
+            break;
+        }
+    }
+
+/*
+    indentStyleLblElt.appendChild(document.createTextNode('Indentation: '));
+    containerElt.appendChild(indentStyleLblElt);
+    containerElt.appendChild(selectIndentStyleElt);
+
+    tabWidthLblElt.appendChild(document.createTextNode('Tab width: '));
+    containerElt.appendChild(tabWidthLblElt);
+    containerElt.appendChild(selectTabWidthElt);
+*/
+
+    contentTitleElt.parentNode.insertBefore(containerElt, contentTitleElt.nextSibling);
 }());

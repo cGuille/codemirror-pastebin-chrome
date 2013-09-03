@@ -19,6 +19,7 @@
                 "lib/codemirror/active-line.js",
                 "lib/codemirror/matchbrackets.js",
                 "lib/codemirror/modes.js",
+                "lib/codemirror/themes-list.js",
                 "src/codemirror-for-pastebin.js"
             ],
             "run_at":  "document_end"
