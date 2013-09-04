@@ -66,6 +66,10 @@
         ),
         updateTheme = cm.setOption.bind(cm, 'theme');
 
+    if (!pasteFormatElt) {
+        return;
+    }
+
     cm.setSize('100%');
 
     pasteFormatElt.addEventListener('change', function (event) {
