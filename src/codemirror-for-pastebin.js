@@ -72,7 +72,7 @@
 
     cm.setSize('100%');
 
-    pasteFormatElt.addEventListener('change', function (event) {
+    function inferMode() {
         var selectedId = pasteFormatElt.options[pasteFormatElt.selectedIndex].value,
             selectedLanguage = languages[selectedId];
         if (!selectedLanguage) {
@@ -81,7 +81,9 @@
         } else {
             cm.setOption('mode', selectedLanguage);
         }
-    }, false);
+    }
+    pasteFormatElt.addEventListener('change', inferMode, false);
+    inferMode();
 
     var contentTitleElt = document.querySelector('div.content_title'),
         containerElt = document.createElement('div'),
